@@ -1,6 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-    //The Methods
+                                               //The Methods
  class Calculatoroperations {
 
         public double addition(ArrayList<Double> numbers) {
@@ -28,10 +28,18 @@ import java.util.ArrayList;
             }
             return multi;
         }
+        public double division(ArrayList<Double> numbers) {
+            double division = numbers.get(0);
+            for (int i = 1; i < numbers.size(); i++) {
+                division /= numbers.get(i);
+            }
+            return division;
+        }
     }
+                                              //end of the methods
 
 
-                                                //début du code
+                                                //Start of the code
                                                public class Calculator {
     public static void main(String[] args) {
         String answer;
@@ -45,6 +53,10 @@ import java.util.ArrayList;
             System.out.println("1.basic operations (+,-,*,/,%) 2.Special commands (PGCD,PPCM,Calculate the power of a number...  3.More advanced Options");
             System.out.println("You may also stop the program by writing stop ");
             String choice = input.nextLine();
+            while (!choice.equals("1") && !choice.equals("2") && !choice.equals("3") && !choice.equalsIgnoreCase("stop")) {
+                System.out.println("Invalid choice. Please enter 1, 2, 3 or stop.");
+                choice = input.nextLine();
+            }
             if (choice.equalsIgnoreCase("stop")) {
                 System.exit(0);
             }
@@ -53,7 +65,10 @@ import java.util.ArrayList;
                 System.out.print("You choosed the basic operations ");
                 System.out.print("Please enter the desired operation (+,-,*,/,%) ");
               String answer2 = input.nextLine();
-
+                while (!answer2.equals("+") && !answer2.equals("-") && !answer2.equals("*") && !answer2.equals("/") && !answer2.equals("%")) {
+                    System.out.println("Invalid operation, please try again.");
+                    answer2 = input.nextLine();
+                }
 
               //Addition
               if (answer2.equals("+")) {
@@ -61,6 +76,10 @@ import java.util.ArrayList;
                   boolean adding = true;
                   while (adding) {
                       System.out.println("Enter a number:");
+                      while (!input.hasNextDouble()) {
+                          System.out.println("Enter a valid number.");
+                          input.next();
+                      }
                       double number = input.nextDouble();
                       numbersadd.add(number);
                       input.nextLine();
@@ -78,13 +97,17 @@ import java.util.ArrayList;
 
               //end of the addition
 
-                //début de la soustraction
+                //Start of the Subtraction
 
                 if (answer2.equals("-") ){
                     ArrayList<Double> numberssub = new ArrayList<>();
                     boolean subtraction = true;
                     while (subtraction) {
                         System.out.println("Enter a number:");
+                        while (!input.hasNextDouble()) {
+                            System.out.println("Enter a valid number.");
+                            input.next();
+                        }
                         double number = input.nextDouble();
                         input.nextLine();
                         numberssub.add(number);
@@ -97,6 +120,10 @@ import java.util.ArrayList;
                             subtraction = false;
                             break;
                         }
+                        else {
+                            subtraction = true;
+                            System.out.println("The entered value is incorrect, please try again");
+                        }
                     }
                     System.out.println("The result of the subtraction is : " + operations.subtraction(numberssub));
                 }
@@ -107,6 +134,10 @@ import java.util.ArrayList;
                     boolean multiplication = true;
                     while (multiplication) {
                         System.out.println("Enter a number:");
+                        while (!input.hasNextDouble()) {
+                            System.out.println("Enter a valid number.");
+                            input.next();
+                        }
                         double number = input.nextDouble();
                         numbersmulti.add(number);
                         input.nextLine();
@@ -119,10 +150,45 @@ import java.util.ArrayList;
                             multiplication = false;
                             break;
                         }
+                        else {
+                            multiplication = true;
+                            System.out.println("The entered value is incorrect, please try again");
+                        }
+
                         }
                     System.out.println("The result of the multiplication is : " + operations.multiplication(numbersmulti));
                     }
                  //end of the multiplication
+
+                // start of the division
+
+                if(answer2.equals("/")){
+                    ArrayList<Double> numbersdiv = new ArrayList<>();
+                    boolean division = true;
+                    while (division) {
+                        System.out.println("Enter a number:");
+                        while (!input.hasNextDouble()) {
+                            System.out.println("Enter a valid number.");
+                            input.next();
+                        }
+                        double number = input.nextDouble();
+                        numbersdiv.add(number);
+                        input.nextLine();
+                        System.out.println("Do you want to divide using another number? (yes/no)");
+                        answer = input.nextLine();
+                        if (answer.equalsIgnoreCase("yes")) {
+                            division = true;
+                        } else if (answer.equalsIgnoreCase("no")) {
+                            division = false;
+                            break;
+                        }
+                        else {
+                            division = true;
+                            System.out.println("The entered value is incorrect, please try again");
+                        }
+                    }
+                    System.out.println("The result of the division is : " + operations.division(numbersdiv));
+                }//end of the division
 
 
 
