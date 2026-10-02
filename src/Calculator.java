@@ -35,6 +35,13 @@ import java.util.ArrayList;
             }
             return division;
         }
+        public double modulo(ArrayList<Double> numbers) {
+            double modulo = numbers.get(0);
+            for (int i = 1; i < numbers.size(); i++) {
+                modulo %= numbers.get(i);
+            }
+            return modulo;
+        }
     }
                                               //end of the methods
 
@@ -85,12 +92,17 @@ import java.util.ArrayList;
                       input.nextLine();
                       System.out.println("Do you want to add another number? (yes/no)");
                        answer = input.nextLine();
-                      if (answer.equalsIgnoreCase("no")) {
-                          adding = false;
-                          break;
-                      } else if (answer.equalsIgnoreCase("yes")) {
-                          adding = true;
-                      }
+                       if(answer.equalsIgnoreCase("yes")){
+                           adding = true;
+                       }
+                       else if(answer.equalsIgnoreCase("no")){
+                           adding = false;
+                           break;
+                       }
+                       else{
+                           System.out.println("Invalid input. Please try again.");
+                           input.next();
+                       }
                   }//closes adding loop
                   System.out.println("The result of the addition of your entries are : " + operations.addition(numbersadd));
                   }
@@ -121,8 +133,8 @@ import java.util.ArrayList;
                             break;
                         }
                         else {
-                            subtraction = true;
                             System.out.println("The entered value is incorrect, please try again");
+                            input.next();
                         }
                     }
                     System.out.println("The result of the subtraction is : " + operations.subtraction(numberssub));
@@ -151,8 +163,8 @@ import java.util.ArrayList;
                             break;
                         }
                         else {
-                            multiplication = true;
                             System.out.println("The entered value is incorrect, please try again");
+                            input.next();
                         }
 
                         }
@@ -183,14 +195,41 @@ import java.util.ArrayList;
                             break;
                         }
                         else {
-                            division = true;
                             System.out.println("The entered value is incorrect, please try again");
+                            input.next();
                         }
                     }
                     System.out.println("The result of the division is : " + operations.division(numbersdiv));
                 }//end of the division
 
-
+// start of the modulo operation :
+if(answer2.equals("%")){
+    ArrayList<Double> numbersmodulo = new ArrayList<>();
+        boolean modulo = true;
+        while (modulo) {
+            System.out.println("Enter a number:");
+            while (!input.hasNextDouble()) {
+                System.out.println("Enter a valid number.");
+                input.next();
+            }
+            double number = input.nextDouble();
+            numbersmodulo.add(number);
+            input.nextLine();
+            System.out.println("Do you want to modulo another number? (yes/no)");
+            answer = input.nextLine();
+            if (answer.equalsIgnoreCase("yes")) {
+                modulo = true;
+            } else if (answer.equalsIgnoreCase("no")) {
+                modulo = false;
+                break;
+            } else {
+                System.out.println("The entered value is incorrect, please try again");
+                input.next();
+        }
+        }//end of the modulo loop
+    System.out.println("The result of your operations are : " + operations.modulo(numbersmodulo));
+}
+                //end of the modulo operation
 
 
 
